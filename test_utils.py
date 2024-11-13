@@ -30,7 +30,7 @@ def summary(model):
                   metrics=['accuracy'])
     result = []
     for layer in model.layers:
-        descriptors = [layer.__class__.__name__, layer.output_shape, layer.count_params()]
+        descriptors = [layer.__class__.__name__, layer.output.shape, layer.count_params()]
         if (type(layer) == Conv2D):
             descriptors.append(layer.padding)
             descriptors.append(layer.activation.__name__)
@@ -46,7 +46,7 @@ def summary(model):
         if (type(layer) == Dense):
             descriptors.append(layer.activation.__name__)
         if (type(layer) == LSTM):
-            descriptors.append(layer.input_shape)
+            descriptors.append(layer.input.shape)
             descriptors.append(layer.activation.__name__)
             descriptors.append(layer.return_sequences)
         if (type(layer) == RepeatVector):
